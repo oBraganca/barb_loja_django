@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags%}
+
+{% block title %}Pagina inicial{% endblock %}
+
+{% block content %}
+    <h2>New post</h2>
+
+    <div class="offset-1 col-10 list-div">
+        <h1>Adicione sua nova tarefa:</h1>
+        <form method="POST" enctype= multipart/form-data>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" class="btn btn-success" value="Criar tarefaas">
+        </form>
+    </div>
+{% endblock %}

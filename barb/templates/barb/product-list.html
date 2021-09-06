@@ -1,0 +1,67 @@
+{% load static%}
+<div class="grid">
+  <p class="ajaxLoader">Loading...</p>
+  {% for prod in products %}
+  <div class="main-grid">
+    <div class="img-vend">
+      <a href="" class="href-fav">
+          <div class="fav">
+              <i class="far fa-heart"></i>
+          </div>
+      </a>
+      <img src="../../../uploads/{{ prod.upload }}" alt="Era pra aparecer uma imagem aqui!">
+      <form method='POST' action='{% url "cart:update" %}' class="form href-car"> {% csrf_token %}
+        <input type='hidden' name='product_id' value='{{ prod.id }}' />
+        {% if prod in cart.products.all %}
+            <button type='submit' class='btn_car'>Produto no carrinho <i class="fas fa-cart-arrow-down"></i></button>
+        {% else %}
+            <button type='submit' class='btn_car'>Adicionar ao carrinho  <i class="fas fa-cart-plus"></i></button>
+        {% endif %}
+    </form>
+
+    </div>
+    
+    <p>
+      <a href="/view/{{prod.id}}">{{prod.title}}</a><br>
+      R${{prod.price}}  
+    </p>
+    
+  </div>
+  {% endfor %}
+</div>
+<div aria-label="Page navigation example">
+  <ul class="pagination ">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    {% for i in page_range %}
+    <li class="page-item">
+      <input style="opacity: 0; position: absolute;" class="filter-checkbox" type="radio" name="page" value="{{i}}"  id="id_page{{i}}">
+      <label class="page-link"for="id_page{{i}}" >{{i}}</label>
+    </li>
+    {% endfor %}
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</div>
+<script>
+  $(document).ready(function () {
+    $(".ajaxLoader").hide()
+
+    $(".filter-checkbox").on('click', function(){
+        var _filterObj;
+        _filterObj = $(".filter-checkbox").serialize();
+        
+
+        $.ajax({
+            url:"/prods",
+            data:_filterObj,
+            beforeSend:function(){
+                $(".ajaxLoader").show()
+            },
+            success:function(res){
+                $("#filteredProducts").html(res)
+                $(".ajaxLoader").hide()
+                window.scrollTo(0, 10)
+            }
+        })
+    })
+  });
+</script>

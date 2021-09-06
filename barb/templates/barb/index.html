@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Pagina inicial{% endblock %}
+
+{% block content %}
+<div class="col-12 cont-index">
+    <div class="img-sd">
+        <div class="slide active">
+            <img src="{% static 'img/1.jpg'%}" alt="" srcset="">
+            <div class="info-slide">
+                <h2>test1</h2>
+                <p>texttexttexttexttexttexttexttexttexttexttexttext</p>
+                
+            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static 'img/2.jpg'%}" alt="" srcset="">
+            <div class="info-slide">
+                <h2>test2</h2>
+                <p>texttexttexttexttexttexttexttexttexttexttexttext</p>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static 'img/3.jpg'%}" alt="" srcset="">
+            <div class="info-slide">
+                <h2>test3</h2>
+                <p>texttexttexttexttexttexttexttexttexttexttexttext</p>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static 'img/4.jpg'%}" alt="" srcset="">
+            <div class="info-slide">
+                <h2>test4</h2>
+                <p>texttexttexttexttexttexttexttexttexttexttexttext</p>
+            </div>
+        </div>
+        <div class="navig">
+            <div class="btn-nav active"></div>
+            <div class="btn-nav"></div>
+            <div class="btn-nav"></div>
+            <div class="btn-nav"></div>
+        </div>
+    </div>
+
+
+    <div class="prod-ind">    
+        <div class="row-ind">
+            <div class="zoom">    
+                <img src="../../../uploads/uploads/femine_holo_nike.jpg" alt="" srcset="">
+            </div>
+            <a href="">TITLE PRODUCT</a>
+        </div>    
+        <div class="row-ind">
+            <div class="zoom">    
+                <img src="../../../uploads/uploads/jeans_masculino.png" alt="" srcset="">
+            </div>
+            <a href="">TITLE PRODUCT</a>
+        </div>    
+        <div class="row-ind">
+            <div class="zoom">    
+                <img src="../../../uploads/uploads/tenis_vans_authentic.jpg" alt="" srcset="">
+            </div>
+            <a href="">TITLE PRODUCT</a>
+        </div>
+    </div>
+    
+    <div class="container-vend">
+        <div class="title-vend">
+            <h3>Mais Vendidos</h3>
+        </div>
+        <div class="prod-vend">
+            
+            <div class="grid-vend">
+                {% for prod in product %}
+                <div class="main-grid">
+                    <div class="img-vend">
+                      <a href="" class="href-fav">
+                          <div class="fav">
+                              <i class="far fa-heart"></i>
+                          </div>
+                      </a>
+                      <img src="../../../uploads/{{ prod.upload }}" alt="Era pra aparecer uma imagem aqui!">
+                      <form method='POST' action='{% url "cart:update" %}' class="form href-car"> {% csrf_token %}
+                        <input type='hidden' name='product_id' value='{{ prod.id }}' />
+                        {% if prod in cart.products.all %}
+                            <button type='submit' class='btn_car'>Produto no carrinho <i class="fas fa-cart-arrow-down"></i></button>
+                        {% else %}
+                            <button type='submit' class='btn_car'>Adicinar ao carrinho <i class="fas fa-cart-plus"></i></button>
+                        {% endif %}
+                    </form>
+          
+          
+                    </div>
+                    
+                    <p>
+                      <a href="/view/{{prod.id}}">{{prod.title}}</a><br>
+                      R${{prod.price}}  
+                    </p>
+                    
+                  </div>
+                {% endfor %}
+            </div>
+        </div>        
+    </div>
+        
+
+    <script type="text/javascript">
+        var slides = document.querySelectorAll(".slide")
+        var btns = document.querySelectorAll(".btn-nav")
+        let current = 1
+        
+        var manualnav = (manual) => {
+
+            
+            slides.forEach((slide)=>{
+                slide.classList.remove('active')
+                btns.forEach((btnNav) => {
+                    btnNav.classList.remove('active')
+                })
+            })
+
+            slides[manual].classList.add("active")
+            btns[manual].classList.add("active")
+        }
+
+        btns.forEach((btnNav, i) => {
+            btnNav.addEventListener("click", () =>{
+                manualnav(i);
+                current = i
+            })
+        })
+
+
+
+        var repeat = (activeClass) => {
+            
+            var active = document.getElementsByClassName('active');
+            
+            
+            let i = 1;
+
+            var repeater = () =>{
+                setTimeout(function(){
+                    [...active].forEach( (activeClass) => {
+                        activeClass.classList.remove('active')
+                        
+                    })
+
+                    slides[i].classList.add('active');
+                    btns[i].classList.add('active');
+                    i++
+
+                    if(slides.length == i){
+                        i=0                        
+                    }
+                    console.log("A")
+                    repeater();
+                }, 7000)
+            }
+            console.log("B")
+            repeater()
+        }
+        console.log("C")
+        repeat();
+    </script>
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Meu carrinho{% endblock %}
+
+{% block content %}
+  <div class="container my-3 table-responsive">
+    <h1 class="font-weight bold">
+        Meu carrinho
+    </h1>
+  </div>
+  <div class="body-cart">
+    
+    {% if cart.products.exists %}
+      <table class="tables">
+        <thead>
+          <tr>
+            <th>Artigo</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+          {% for product in pro %}
+            {%if product.cart == cart%}
+              {% if product.qnty > product.products.amount %}
+                <tbody class='esgotado'>
+                  {%if forloop.first%}
+                  <tr>
+                    
+                    <td>
+                      <p>Esse produto não se encontra disponivel</p> 
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td><button>Limpar produtos</button></td>
+                  </tr>
+                  {%endif%}
+                  <tr class='{{product.id}} '>
+                    <td>
+                      <div class='desc-item'>
+                        <div class="cart-img">
+                        <img src="../../../uploads/{{ product.products.upload }}" alt="Era pra aparecer uma imagem aqui!">
+                      </div>
+                      <div class="detail">
+                        <a class='name-prod'href='/view/{{product.products.id}}'> {{ product.products.title }}</a>
+                        <button type="button" style="width: 34px; font-size: 13px;" class="btn btn-secondary">X</button>
+                        <div>
+                          <a href=""><i class="far fa-heart"></i> Salvar em favoritos</a>
+                          
+                          <a href='  '>Deseja remover? <i class="fas fa-cart-arrow-down"></i></a>
+                        </div>
+                      </div>
+                      </div>
+                      
+                    </td>
+                    <td class='price-item'>
+                      <p>{{ product.products.price }}</p>
+                      
+                    </td>
+                    <td class='qnt-item'>
+                      <ul>
+                        <li class="qty-opt left">
+                          <input type="button" for="{{product.id}}" value="-" class="minus" data-name="{{product.id}}">
+                        </li>
+                        <li>
+                          <input type="number" id="{{product.id}}" step="1" min="1" max="" name="quantity" value="{%if pro%}{{product.qnty}}{%else%}1{%endif%}" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
+                        </li>
+                        <li tabindex="0" role="button" class="qty-opt right ">
+                          <input type="button" value="+" for="{{product.id}}" class="plus" data-name="{{product.id}}">
+                        </li>
+                      </ul>
+                    </td>
+                    <td class='total-item'>
+                      <p id='total-prod-item'>{{ product.total}}</p>
+                    </td>
+                  </tr>
+                </tbody>
+              {%else%}
+                <tbody class=" bor">
+                  <tr class='{{product.id}}'>
+                    <td>
+                      <div class='desc-item'>
+                        <div class="cart-img">
+                        <img src="../../../uploads/{{ product.products.upload }}" alt="Era pra aparecer uma imagem aqui!">
+                      </div>
+                      <div class="detail">
+                        <a class='name-prod'href='/view/{{product.products.id}}'> {{ product.products.title }}</a>
+                        <button type="button" style="width: 34px; font-size: 13px;" class="btn btn-secondary">X</button>
+                        <div>
+                          <a href=""><i class="far fa-heart"></i> Salvar em favoritos</a>
+                          
+                          <a href='  '>Deseja remover? <i class="fas fa-cart-arrow-down"></i></a>
+                        </div>
+                      </div>
+                      </div>
+                      
+                    </td>
+                    <td class='price-item'>
+                      <p>{{ product.products.price }}</p>
+                      
+                    </td>
+                    <td class='qnt-item'>
+                      <ul>
+                        <li class="qty-opt left">
+                          <input type="button" for="{{product.id}}" value="-" class="minus" data-name="{{product.id}}">
+                        </li>
+                        <li>
+                          <input type="number" id="{{product.id}}" step="1" min="1" max="" name="quantity" value="{%if pro%}{{product.qnty}}{%else%}1{%endif%}" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
+                        </li>
+                        <li tabindex="0" role="button" class="qty-opt right ">
+                          <input type="button" value="+" for="{{product.id}}" class="plus" data-name="{{product.id}}">
+                        </li>
+                      </ul>
+                    </td>
+                    <td class='total-item'>
+                      <p id='total-prod-item'>{{ product.total}}</p>
+                    </td>
+                  </tr>
+                </tbody>
+              {%endif%}
+            {%endif%}
+          {% endfor %}
+      </table>
+    {% else %}
+      <p class='lead'>Carrinho vazio</p>
+    {% endif %}
+  </div>
+{% endblock %}  <!-- 
+          <tr>
+            <td colspan="2"><b>Subtotal</b></td>
+            <td>{{ cart.subtotal }}</td>
+          </tr>
+          <tr>
+            <td colspan="2"><b>Total</b></td>
+            <td>{{ cart.total }}</td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td><a class='btn btn-lg btn-success' href='{% url "cart:checkout" %}'>Conferir compra</a></td>
+          </tr> -->

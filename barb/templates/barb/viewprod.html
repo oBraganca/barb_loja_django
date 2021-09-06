@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags%}
+
+{% block title %}Pagina inicial{% endblock %}
+
+{% block content %}
+  <div class="col-12 view-prod">
+    <div class="col-10 list-div2">
+        <div class="col-img">
+          {% if prod.upload %}
+              <img src="{{ prod.upload.url }}" alt="Era pra aparecer uma imagem aqui!"><hr>
+          {% else %}
+              Imagem não cadastrada
+          {% endif %}
+        </div>
+        <div class="col-vend">
+          <p>{{path}}</p>
+          <p class='title-prod'>{{prod.title}}</p>
+          <div>
+            <button type="button" class="btn btn-secondary">P</button>
+            <button type="button" class="btn btn-secondary">M</button>
+            <button type="button" class="btn btn-secondary">G</button>
+            {% if user.is_superuser %}
+              <a href="/edit/{{prod.id}}" class="btn btn-info">Editar produto (Admin) <i class="fas fa-cog"></i></a>
+            {% endif %}
+          </div>
+
+          <p class="price-prod">R${{prod.price}}</p>
+          
+          <div class="comprar">
+            <button type="button" class="btn btn-success">Comprar</button>
+          </div>
+
+
+          
+          <div class="metodos_compra">
+            
+            <a href="#">
+              <img src="https://cdn.awsli.com.br/production/static/img/formas-de-pagamento/paypal-logo.png?v=14d273b" alt="">
+              <span>Parcelas</span>
+            </a>
+            <hr>
+            <a href="#">
+              <img src="https://cdn.awsli.com.br/production/static/img/formas-de-pagamento/mercadopagov1-logo.png?v=14d273b" alt="">
+              <span>Parcelas</span>
+            </a>
+            <hr>
+            <a href="#">
+              <img src="https://cdn.awsli.com.br/production/static/img/formas-de-pagamento/payu-cards.png?v=14d273b" style="max-width:180px;" alt="">
+              <span>Parcelas</span>
+            </a>
+            <hr>
+            <a href="#">
+              <img src="https://cdn.awsli.com.br/production/static/img/formas-de-pagamento/deposito-logo.png?v=14d273b" alt="">
+              <span>Parcelas</span>
+            </a>
+            <hr>
+            <a href="#">
+              <img src="https://cdn.awsli.com.br/production/static/img/formas-de-pagamento/boleto-logo.png?v=14d273b" alt="">
+              <span>Parcelas</span>
+            </a>
+          </div>
+          
+
+          <form method="POST">
+            {% csrf_token %}
+            
+            <p class="frete">Calcule o frete:
+              {{ form|crispy }}
+              {% for message in messages %}
+              <div class="container-fluid p-0">
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  {{ message }}
+                </div>
+              </div>
+              {% endfor %}
+              <button class="btn btn-outline-secondary" type="submit">OK</button>
+          </form>
+
+
+        </div>
+        
+    </div>
+    
+      
+  </div>
+  <div class="col-9 about-prod">
+    <p class="description-prod">Description: {{prod.description}}</p>
+    <div class="col-info">
+      <span class='description-prod'>Caracteristicas:</span>
+      <p class='name-prod'>{{prod.title}}</p>
+      <p class="amount-prod">Em estoque: {{prod.amount}}</p>
+      <p class="category-prod">Categoria do produto: {{prod.category}}</p>
+      
+      {% if prod.gender.id == 3 %}
+        <p class="gender-prod">Genero do produto: Unissex</p>
+      {% elif prod.gender.id == 2 %}
+        <p class="gender-prod">Genero do produto: Masculino</p>
+      {% elif prod.gender.id == 1 %}
+        <p class="gender-prod">Genero do produto: Feminino</p>
+      {% else %}
+        <p class="gender-prod">Genero do produto: Genero nao encontrado</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
