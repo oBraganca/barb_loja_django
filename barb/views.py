@@ -28,13 +28,13 @@ def allProds(request):
     search = request.GET.get('search')
 
     cart_obj, new_obj = Cart.objects.new_or_get(request)
-
+    
+    
     categorys = Category.objects.all()
     genders = Gender.objects.all()
     proda = 9
 
     products= product.objects.all().order_by('-id')
-
     if search:
         products = product.objects.filter(title__icontains=search)
         

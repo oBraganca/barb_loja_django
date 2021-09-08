@@ -16,8 +16,18 @@ class CartManager(models.Manager):
             new_obj = False
             cart_obj = qs.first()
             if request.user.is_authenticated and cart_obj.user is None:
-                cart_obj.user = request.user
-                cart_obj.save()
+                try:
+                    for y in Cart.objects.all():
+                        if y.user == request.user:
+                            usuario = y.user
+                            cart_atual = y
+                except Exception as e:
+                    print(e)
+                if usuario:
+                    cart_obj = cart_atual
+                else:
+                    cart_obj.user = request.user
+                    cart_obj.save()
         else:
             cart_obj = Cart.objects.new(user = request.user)
             new_obj = True
