@@ -4,7 +4,7 @@
 ### A ideia principal é construir uma especie de e-commerce, que é uma aplicação muito popular e vem crescendo cada dia mais com as vendas online. Eu optei por esse projeto foi por ser uma coisa "nova" para mim e que fosse ao mesmo tempo desafiadora. Graças a essa decisão, fui capaz de aprender coisas extraordinaria como os testes unitario do Django, Ajax e diversas funcionalidade das tecnologias.
 
 # Situação atual do projeto:
-### Está sendo feita uma implementação de um sistema de pagamento, usando o pagarme, que disponibiliza uma interface de testes. Com certeza é bem diferente das coisas que eu já fiz anteriormente, ligar com dados bancarios requer bastante segurança mas além disso, ta sendo um experiência bem gostosa, aprender coisas novas em geral é.
+### Está sendo feita uma implementação de um sistema de pagamento, usando o pagarme, que disponibiliza uma interface de testes. Com certeza é bem diferente das coisas que eu já fiz anteriormente, ligar com dados bancarios requer bastante segurança mas além disso, ta sendo um experiência bem gostosa, aprender coisas novas em geral é bom.
 
 # A FAZER:
 - [ ] Terminar de estilizar o cartão de credito.
