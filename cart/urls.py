@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 app_name = "carts"
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path('', cart_detail, name='home'),
     path('checkout/', checkout_home, name='checkout'),
     path('update/', cart_update, name='update'),
+    path('checkout/payment', include('card.urls')),
 ]

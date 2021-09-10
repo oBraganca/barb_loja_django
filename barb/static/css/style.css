@@ -744,6 +744,92 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
     /* border-bottom: 10px solid #dee2e6; */
     color: #e4e0e7;    
 }
+
+/*Payment*/
+.card__chip{
+    width: 35px;
+}
+.card__chip img{
+    width:3rem;
+    margin-bottom: 1rem;
+}
+.card{
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card__flip{
+	width: 440px;
+	height: 280px;
+	transform-style: preserve-3d;
+    background-color: rgb(124, 124, 124);
+    border-radius: 10px;
+    transition: transform 0.8s;
+}
+
+.card__flip:hover{
+	transform: rotateY(180deg);
+}
+
+.card__flip {
+    position: relative;
+}
+.front, .back{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+    backface-visibility: hidden;
+}
+
+.back{
+    
+	transform: rotateY(180deg);
+}.card__row{
+    margin:26px;
+}
+label{
+    font-size: 13px;
+}
+.card__coll{
+    display:flex;
+    flex-direction:column;
+}
+.card__input__large{
+    width:80%;
+    height: 35px;
+    font-size: 20px;
+    padding-left: 15px;
+}
+.card__input__medium{
+    width:100%;
+    height: 35px;
+    font-size: 20px;
+    padding-left: 15px;
+}
+.expire{
+    width:24%;
+    margin-right: 10%;
+}
+.card__input__small{
+    width:100%;
+    height: 35px;
+    font-size: 20px;
+    padding-left: 15px;
+}
+.coll_small{
+    display:flex;
+}
+.card input:focus{
+    
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+}
 /* footer */
 
 footer{
