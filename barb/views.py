@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 import requests
 import os
 from django.core.paginator import Paginator
+from django.core.files.storage import default_storage
 
 
 from cart.models import Cart
@@ -127,7 +128,12 @@ def editProd(request, id):
         form = ProdForm(instance=prod)
         if(request.method == 'POST'):
             form = ProdForm(request.POST, request.FILES, instance=prod)
+            
+            if(request.FILES):
+                    old_img = str(prod.upload)
+            
             if(form.is_valid()):
+                default_storage.delete(old_img)
                 prod.save()
                 
                 return redirect('/')
@@ -142,6 +148,7 @@ def editProd(request, id):
 def deleteProd(request, id):
     if request.user.is_superuser:
         prod = get_object_or_404(product, pk=id)
+        default_storage.delete(str(prod.upload))
         prod.delete()
     else:
         return redirect('/')

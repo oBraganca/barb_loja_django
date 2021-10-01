@@ -43,7 +43,7 @@
     </div>
 
 
-    <div class="prod-ind">    
+    <div class="prod-ind container-fluid">    
         <div class="row-ind">
             <div class="zoom">    
                 <img src="../../../uploads/uploads/femine_holo_nike.jpg" alt="" srcset="">
@@ -58,7 +58,7 @@
         </div>    
         <div class="row-ind">
             <div class="zoom">    
-                <img src="../../../uploads/uploads/tenis_vans_authentic.jpg" alt="" srcset="">
+                <img class='img-fluid' src="../../../uploads/uploads/tenis_vans_authentic.jpg" alt="" srcset="">
             </div>
             <a href="">TITLE PRODUCT</a>
         </div>
@@ -70,7 +70,7 @@
         </div>
         <div class="prod-vend">
             
-            <div class="grid-vend">
+            <div class="grid-vend ">
                 {% for prod in product %}
                 <div class="main-grid">
                     <div class="img-vend">
@@ -79,7 +79,7 @@
                               <i class="far fa-heart"></i>
                           </div>
                       </a>
-                      <img src="../../../uploads/{{ prod.upload }}" alt="Era pra aparecer uma imagem aqui!">
+                      <img src="../../../uploads/{{ prod.upload }}" class='img-fluid' alt="Era pra aparecer uma imagem aqui!">
                       <form method='POST' action='{% url "cart:update" %}' class="form href-car"> {% csrf_token %}
                         <input type='hidden' name='product_id' value='{{ prod.id }}' />
                         {% if prod in cart.products.all %}

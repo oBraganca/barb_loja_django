@@ -27,7 +27,6 @@ $(document).ready(function () {
             success:function(res){
                 $("#filteredProducts").html(res)
                 $(".ajaxLoader").hide()
-                window.scrollTo(0, 10)
             }
         })
     })

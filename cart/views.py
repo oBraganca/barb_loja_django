@@ -1,3 +1,4 @@
+from django.db.models.fields import DecimalField
 from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from .models import Cart, Qnty
@@ -9,6 +10,8 @@ from billing.models import BillingProfile
 from django.contrib import messages
 
 from barb.models import product
+
+from decimal import Decimal
 
 def cart_detail(request):
     cart_obj, new_obj  = Cart.objects.new_or_get(request)
@@ -27,7 +30,6 @@ def cart_detail(request):
         for i in pri:
             Qnty.objects.create(cart = cart_obj, products=i)
 
-    print("DNV NNNNNNNNNNNN")
 
     # for p in pro:
     #     if p.qnty > p.products.amount:
@@ -82,7 +84,7 @@ def cart_update(request):
             Qnty.objects.filter(products=product_obj).delete()
         else: 
             cart_obj.products.add(product_obj)
-            Qnty.objects.create(cart = cart_obj, products=product_obj) #Coloca o produto clicado no Qnty
+            Qnty.objects.create(cart = cart_obj, products=product_obj, total = product_obj.price) #Coloca o produto clicado no Qnty
         request.session['cart_items'] = cart_obj.products.count()
     return redirect("cart:home")
 

@@ -7,7 +7,6 @@
 ### Está sendo feita uma implementação de um sistema de pagamento, usando o pagarme, que disponibiliza uma interface de testes. Com certeza é bem diferente das coisas que eu já fiz anteriormente, ligar com dados bancarios requer bastante segurança mas além disso, ta sendo um experiência bem gostosa, aprender coisas novas em geral é bom.
 
 # A FAZER:
-- [ ] Terminar de estilizar o cartão de credito.
 - [ ] Billings Profille (**_Perfil de cobrança_**).
 - [ ] Shipping Profile (**_Perfil de entrega_**).
 - [ ] Terminar de configurar quando um produto está fora de estoque.
@@ -16,12 +15,12 @@
 - [ ] Perfil de usuario com informações e fotos.
 - [ ] Ofertas do dia.
 - [ ] Arrumar o rodapé.
-- [ ] Implementar o AWS e HEROKU.
+- [x] Implementar o AWS e HEROKU.
 
 
 # Erros e Bugs para arrumar:
-- [ ] Quando damos filtramos/paginamos a pagina sobe (**_Configuração feita no JavaScript_**).
-- [x] Quando o usuario sai da conta e entre dnv, é criado outro cart session.
-- [ ] Quando um produto é apagado, a imagem continua do banco.
+- [x] Quando filtramos/paginamos, a pagina sobe (**_Configuração feita no JavaScript_**).
+- [x] Quando o usuario sai da conta e entre de novo, é criado outro cart session.
+- [x] Quando um produto é apagado, a imagem continua do banco.
 - [ ] Quando você entra no site, o carrinho não mostra de primeira a quantidade de produtos (navbar).
-- [ ] Quando adicionamos um novo produto - o preço do produto vem como 0.
+- [x] Quando adicionamos um novo produto - o preço do produto vem como 0.
