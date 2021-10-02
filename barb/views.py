@@ -42,6 +42,7 @@ def allProds(request):
     page_range = obj_paginator.page_range
 
     
+    end = obj_paginator.num_pages
 
 
     # FILTRAGEM E PAGINAÇÃO
@@ -61,29 +62,20 @@ def allProds(request):
             for x in gender:
                 products = products.filter(gender=x).distinct()
         obj_paginator = Paginator(products, proda)
-        # products = obj_paginator.page(1).object_list
-        # print(products,'   1111111111')
+        end = obj_paginator.num_pages
         page_range = obj_paginator.page_range
-        
         if request.GET.get('page'):
             p = int(request.GET.get('page'))
-            print(p)
         else:
             p = 1
         products = obj_paginator.page(p).object_list
-        print()
-        print()
-        print()
-        print(request.GET, '             a')
-        print()
-        print()
-        print()
+
         return render(request, 'barb/product-list.html', 
-        {'products': products,'genders': genders, 'categorys': categorys, 'page_range':page_range,'cart':cart_obj})
+        {'products': products,'genders': genders, 'categorys': categorys, 'page_range':page_range,'cart':cart_obj,'page_atual':p, 'end':end, 'prox':p+1, 'prev':p-1})
     else:
         
         return render(request, 'barb/allprods.html', 
-        {'products': products,'genders': genders, 'categorys': categorys, 'page_range':page_range,'cart':cart_obj})
+        {'products': products,'genders': genders, 'categorys': categorys, 'page_range':page_range,'cart':cart_obj,'page_atual':1, 'end':end, 'prox':2, 'prev':1})
 
 
 def viewproducts(request, id):
