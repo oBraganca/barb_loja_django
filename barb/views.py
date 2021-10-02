@@ -17,7 +17,8 @@ from cart.models import Cart
 
 
 def index(request):
-    mais_vend = product.objects.all().order_by("vendido")[1:9]
+    mais_vend = product.objects.all().order_by("-vendido")[1:9].values()
+    
     cart_obj, new_obj = Cart.objects.new_or_get(request)
     context = {
         "product":mais_vend,
@@ -27,7 +28,6 @@ def index(request):
 
 def allProds(request):
     search = request.GET.get('search')
-
     cart_obj, new_obj = Cart.objects.new_or_get(request)
     
     
@@ -36,8 +36,6 @@ def allProds(request):
     proda = 9
 
     products= product.objects.all().order_by('-id')
-    if search:
-        products = product.objects.filter(title__icontains=search)
         
     obj_paginator = Paginator(products, proda)
     products = obj_paginator.page(1).object_list
@@ -48,9 +46,14 @@ def allProds(request):
 
     # FILTRAGEM E PAGINAÇÃO
     if request.is_ajax():
+        
+
         categor = request.GET.getlist('category')
         gender = request.GET.getlist('gender')
-        products= product.objects.all().order_by('-id')
+        if search:
+            products = product.objects.filter(title__icontains=search)
+        else:
+            products= product.objects.all().order_by('-id')
         if len(categor) > 0:
             for x in categor:
                 products = products.filter(category=x).distinct()
@@ -58,16 +61,23 @@ def allProds(request):
             for x in gender:
                 products = products.filter(gender=x).distinct()
         obj_paginator = Paginator(products, proda)
-        products = obj_paginator.page(1).object_list
+        # products = obj_paginator.page(1).object_list
+        # print(products,'   1111111111')
         page_range = obj_paginator.page_range
         
         if request.GET.get('page'):
             p = int(request.GET.get('page'))
+            print(p)
         else:
             p = 1
-        print(products)
         products = obj_paginator.page(p).object_list
-        
+        print()
+        print()
+        print()
+        print(request.GET, '             a')
+        print()
+        print()
+        print()
         return render(request, 'barb/product-list.html', 
         {'products': products,'genders': genders, 'categorys': categorys, 'page_range':page_range,'cart':cart_obj})
     else:

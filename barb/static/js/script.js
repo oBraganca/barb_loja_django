@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     // var baseUrl = 'http://127.0.0.1:8000/' 
     var $campo = $("#id_cep");
     
@@ -11,15 +12,41 @@ $(document).ready(function () {
     $campo.mask('00000-000', {reverse: true});
     
     $(".ajaxLoader").hide()
-    
-
+    pesq = ''
+    $('#search').bind('keyup', function(event){
+        
+        _filterObj = $(".filter-checkbox").serialize();
+        
+        
+        // console.log(pesq,'  ',$(this).val())
+        if (pesq != $(this).val()){
+            pesq = $(this).val()
+            $.ajax({
+                url:"/prods",
+                data:_filterObj+'&search='+pesq,
+                /*dataType:'json',*/
+                beforeSend:function(){
+                    $(".ajaxLoader").show()
+                },
+                success:function(res){
+                    $("#filteredProducts").html(res)
+                    $(".ajaxLoader").hide()
+                }
+            })
+        }else{
+            console.log(pesq)
+        }
+        
+    })
     $(".filter-checkbox").on('click', function(){
         var _filterObj;
+        
+        pesq = $('#search').val()
         _filterObj = $(".filter-checkbox").serialize();
-
+        // alert(_filterObj)
         $.ajax({
             url:"/prods",
-            data:_filterObj,
+            data:_filterObj+'&search='+pesq,
             /*dataType:'json',*/
             beforeSend:function(){
                 $(".ajaxLoader").show()

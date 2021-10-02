@@ -33,34 +33,14 @@
   <ul class="pagination ">
     <li class="page-item"><a class="page-link" href="#">Previous</a></li>
     {% for i in page_range %}
-    <li class="page-item">
-      <input style="opacity: 0; position: absolute;" class="filter-checkbox" type="radio" name="page" value="{{i}}"  id="id_page{{i}}">
-      <label class="page-link"for="id_page{{i}}" >{{i}}</label>
-    </li>
+    <!-- <input style="opacity: 0; position: absolute;" class="page-next" type="radio" name="page" value="{{i}}"  id="id_page{{i}}">
+    <label class="page-link"for="id_page" >{{i}}</label> -->
+    <li class="page-item"><a class="page-link link_option" href="{{i}}">{{i}}</a></li>
     {% endfor %}
     <li class="page-item"><a class="page-link" href="#">Next</a></li>
   </ul>
 </div>
 <script>
-  $(document).ready(function () {
-    $(".ajaxLoader").hide()
-
-    $(".filter-checkbox").on('click', function(){
-        var _filterObj;
-        _filterObj = $(".filter-checkbox").serialize();
-        
-
-        $.ajax({
-            url:"/prods",
-            data:_filterObj,
-            beforeSend:function(){
-                $(".ajaxLoader").show()
-            },
-            success:function(res){
-                $("#filteredProducts").html(res)
-                $(".ajaxLoader").hide()
-            }
-        })
-    })
-  });
+  var url = "{% static 'js/pagination.js' %}";
+  $.getScript(url);
 </script>

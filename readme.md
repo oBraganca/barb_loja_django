@@ -24,3 +24,5 @@
 - [x] Quando um produto é apagado, a imagem continua do banco.
 - [ ] Quando você entra no site, o carrinho não mostra de primeira a quantidade de produtos (navbar).
 - [x] Quando adicionamos um novo produto - o preço do produto vem como 0.
+- [x] Arrumar os mais vendidos
+
