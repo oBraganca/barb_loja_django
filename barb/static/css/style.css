@@ -467,7 +467,7 @@ ul.messages li {
     border-radius:50%;
     cursor:pointer;
 }
-
+focus
 .img-sd .navig .btn-nav.active{
     background-color: #fff;
     box-shadow: 0 0 2px rgba(0,0,0, 0.5);
@@ -837,7 +837,6 @@ label{
 .card input:focus{
     
     box-shadow: 0 0 0 0;
-    border: 0 none;
     outline: 0;
 }
 /* footer */
