@@ -135,7 +135,8 @@ def editProd(request, id):
                     old_img = str(prod.upload)
             
             if(form.is_valid()):
-                default_storage.delete(old_img)
+                if 'old_img' in locals() or 'old_img' in globals():
+                    default_storage.delete(old_img)
                 prod.save()
                 
                 return redirect('/')

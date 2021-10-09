@@ -23,13 +23,16 @@ class CartManager(models.Manager):
                             cart_atual = y
                 except Exception as e:
                     print(e)
-                if usuario:
+                if 'usuario' in locals() or 'usuario' in globals():
                     cart_obj = cart_atual
                 else:
                     cart_obj.user = request.user
                     cart_obj.save()
+                    print(cart_obj,' - ',cart_obj.user)
         else:
+            
             cart_obj = Cart.objects.new(user = request.user)
+            
             new_obj = True
             request.session['cart_id'] = cart_obj.id
         return cart_obj, new_obj

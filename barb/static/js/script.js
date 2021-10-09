@@ -66,7 +66,30 @@ $(document).ready(function () {
 
 
     
-
+    pesq = ''
+    $('#search').bind('keyup', function(event){
+        
+        _filterObj = $(".filter-checkbox").serialize();
+        
+        
+        // console.log(pesq,'  ',$(this).val())
+        if (pesq != $(this).val()){
+            pesq = $(this).val()
+            $.ajax({
+                url:"/prods",
+                data:_filterObj+'&search='+pesq,
+                /*dataType:'json',*/
+                beforeSend:function(){
+                    $(".ajaxLoader").show()
+                },
+                success:function(res){
+                    $("#filteredProducts").html(res)
+                    $(".ajaxLoader").hide()
+                }
+            })
+        }
+    })
+    
     $(qntPlus).each(function(i) {
         $(this).on("click",function(){
             a = $(this).data('name')
@@ -85,9 +108,6 @@ $(document).ready(function () {
                 url:"/cart",
                 data:qntAct,
                 dataType:'json',
-                beforeSend:function(){
-                    console.log("error")
-                },
                 success:function(res){
                     $('.'+a).find('#total-prod-item').text(res.data)
                 }
@@ -111,9 +131,6 @@ $(document).ready(function () {
                 url:"/cart",
                 data:qntAct,
                 dataType:'json',
-                beforeSend:function(){
-                    console.log('error')
-                },
                 success:function(res){
                     $('.'+a).find('#total-prod-item').text(res.data)
                     

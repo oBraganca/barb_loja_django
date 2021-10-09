@@ -40,7 +40,6 @@
     display: flex;
     justify-content: center;
 }
-
 .prod h4{
     font-size:20px;
 }
@@ -408,8 +407,11 @@ ul.messages li {
 
 .img-sd{
     position:relative;
-    max-width:100vw;
+    max-width:100%;
     min-height: 419.47px;
+    max-height: 800px;
+    margin-bottom: 2%;
+    background-color: r;
 }
 
 .img-sd .slide{
@@ -467,7 +469,6 @@ ul.messages li {
     border-radius:50%;
     cursor:pointer;
 }
-focus
 .img-sd .navig .btn-nav.active{
     background-color: #fff;
     box-shadow: 0 0 2px rgba(0,0,0, 0.5);

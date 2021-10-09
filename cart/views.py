@@ -48,13 +48,13 @@ def cart_detail(request):
                     if int(a) <= i.products.amount:
                         if str(i) == b:
                             i.qnty = a
-                            i.total = float(i.qnty) * i.products.price
+                            i.total = round(Decimal(i.qnty) * Decimal(i.products.price),2)
                             i.save()
                             return JsonResponse({'data' : float(i.total), 'id' : str(i)})
                     else:
                         print("Esse produto está esgotado/nao disponivel para essa quantidade de compra")
             except Exception as e:
-                # print(e)
+                print(e)
                 pass
         
 
@@ -78,7 +78,7 @@ def cart_update(request):
         except product.DoesNotExist:
             print("Mostrar mensagem ao usuário, esse produto acabou!")
             return redirect("cart:home")
-        cart_obj, new_obj = Cart.objects.new_or_get(request) 
+        cart_obj, new_obj = Cart.objects.new_or_get(request)
         if product_obj in cart_obj.products.all(): 
             cart_obj.products.remove(product_obj)
             Qnty.objects.filter(products=product_obj).delete()
