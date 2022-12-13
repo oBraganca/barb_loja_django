@@ -7,6 +7,7 @@
 ### Está sendo feita uma implementação de um sistema de pagamento, usando o pagarme, que disponibiliza uma interface de testes. Com certeza é bem diferente das coisas que eu já fiz anteriormente, ligar com dados bancarios requer bastante segurança mas além disso, ta sendo um experiência bem gostosa, aprender coisas novas em geral é bom.
 
 # A FAZER:
+- [ ] Deixar responsivo
 - [ ] Billings Profille (**_Perfil de cobrança_**).
 - [ ] Shipping Profile (**_Perfil de entrega_**).
 - [ ] Terminar de configurar quando um produto está fora de estoque.

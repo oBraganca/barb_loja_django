@@ -1,1 +1,0 @@
-web: gunicorn barbarosa.wsgi --log-file -
