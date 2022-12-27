@@ -13,14 +13,14 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name='category',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('category', models.CharField(choices=[('tenis', 'Tenis'), ('moletom', 'Moletom'), ('Jeans', 'Jeans')], max_length=10)),
             ],
         ),
         migrations.CreateModel(
-            name='Gender',
+            name='gender',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('gender', models.CharField(choices=[('F', 'Feminine'), ('M', 'Male'), ('U', 'Unisex')], max_length=10)),

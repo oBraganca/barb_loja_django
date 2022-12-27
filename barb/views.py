@@ -2,7 +2,7 @@ from django.db.models.enums import Choices
 from django.http.request import HttpRequest
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse,HttpResponseRedirect
-from .models import product, Gender, Category
+from .models import product, gender, category
 from .form import *
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
@@ -31,8 +31,8 @@ def allProds(request):
     cart_obj, new_obj = Cart.objects.new_or_get(request)
     
     
-    categorys = Category.objects.all()
-    genders = Gender.objects.all()
+    categorys = category.objects.all()
+    genders = gender.objects.all()
     proda = 9
 
     products= product.objects.all().order_by('-id')

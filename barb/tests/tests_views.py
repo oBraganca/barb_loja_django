@@ -1,7 +1,7 @@
 from barb.models import product
 from django.test import TestCase, Client, client
 from cart.models import Cart, Qnty
-from barb.models import product, Category, Gender 
+from barb.models import product, category, gender 
 import pagarme
 
 from django.urls import reverse
@@ -11,8 +11,8 @@ from django.contrib.auth.models import User
 
 class TestExcludeImage(TestCase):
     def setUp(self):
-        self.category = Category.objects.create(category ='oa')
-        self.gender = Gender.objects.create( gender = 'F')
+        self.category = category.objects.create(category ='oa')
+        self.gender = gender.objects.create( gender = 'F')
 
         self.prod1 = product.objects.create(
             title = 'prod1', description= 'prod', price = 212, amount = 55, upload = 'a/a/a/',
