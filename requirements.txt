@@ -8,4 +8,6 @@ requests==2.24.0
 sqlparse==0.4.1
 python-decouple==3.1
 psycopg2-binary>=2.8
-rest_framework==3.14.0
+django-filter==2.4.0
+djangorestframework==3.12.2
+djangorestframework-simplejwt==4.6.0
