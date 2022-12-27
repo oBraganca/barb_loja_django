@@ -1,52 +1,50 @@
 from django.db import models
 
 
-class Category(models.Model):
-
-    CATEGORY = (
-        ('tenis','Tenis'),
-        ('moletom','Moletom'),
-        ('Jeans','Jeans'),
-    )
-    
-    category = models.CharField(max_length=255)
+class category(models.Model):
+    name = models.CharField(max_length=255)
+    desc = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modifed_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.category
+        return self.name
         
 
 
-class Gender(models.Model):
- 
-    GENDER = (
-        ('F', 'Feminine'),
-        ('M', 'Male'),
-        ('U', 'Unisex')
-    )
-
-    gender = models.CharField( 
-        max_length=10, 
-        choices=GENDER,
-    )
+class gender(models.Model):
+    name = models.CharField(max_length=200)
+    desc = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modifed_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.gender
+        return self.name
+
+class discount(models.Model):
+    name = models.CharField(max_length=255)
+    desc = models.CharField(max_length=255)
+    discount_decimal = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
+    active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modifed_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
 
 class product(models.Model):
-
-
-    title = models.CharField(max_length=255)
-    description = models.TextField()
+    name = models.CharField(max_length=255)
+    desc = models.CharField(max_length=255)
+    SKU = models.CharField(max_length=255)
     price = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
-    amount = models.IntegerField(default=False)
-    upload = models.ImageField(upload_to ='uploads/')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    gender = models.ForeignKey(Gender, on_delete=models.CASCADE)
-    vendido = models.IntegerField(default=False)
-    
+    product_category_id = models.ForeignKey(category, on_delete=models.CASCADE)
+    product_gender_id = models.ForeignKey(gender, on_delete=models.CASCADE)
+    discount_id = models.ForeignKey(discount, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modifed_at = models.DateTimeField(auto_now=True)
 
 
     def __str__(self):
-        return self.title
+        return self.name
 
 
