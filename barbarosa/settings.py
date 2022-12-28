@@ -39,7 +39,7 @@ INSTALLED_APPS = [
   'django.contrib.staticfiles',
   'barb',
   'rest_framework',
-  'django-filter',
+  'django_filters',
   'crispy_forms',
   'accounts',
   'cart',
