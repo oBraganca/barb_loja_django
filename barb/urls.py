@@ -10,11 +10,11 @@ from django.contrib.auth.views import LogoutView
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet, basename='UserView')
 router.register(r'groups', views.GroupViewSet, basename='GroupView')
-router.register(r'products', views.ListProductsViewSet, basename='ProductsView')
-router.register(r'product/<int:pk>', views.ProductViewSet, basename='ProductView')
+router.register(r'products', views.ProductListViewSet, basename='ProductsView')
+# router.register(r'products/<int:pk>/', views.ProductViewSet, basename='ProductView')
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
     # path('', views.index, name='index'),
     # path('prods/', views.allProds, name='allprods'),
     # path('view/<int:id>', views.viewproducts, name='view-product'),
